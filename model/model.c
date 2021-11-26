@@ -14,9 +14,11 @@
  * the numerical characters after that character sequence, converting them to an
  * unsigned int to return.
  *
- * parameters: FILE *fp, the pointer to the json file containing ticket information.
+ * parameters: 
+ * FILE *fp, the pointer to the json file containing ticket information.
  *
- * returns The number of tickets in the file represented as an unsigned int.
+ * returns: 
+ * The number of tickets in the file represented as an unsigned int.
  */
 
 size_t ticketCount(FILE *fp){
@@ -39,8 +41,17 @@ size_t ticketCount(FILE *fp){
 	free(buffer);
 	return atoi(num);
 }
-
-void fillTicketField(struct ticket* currentTicket, int index, char **fields, char **endpoints, char*buffer){
+/* Fill the ticket field corresponding to the index parameter with the next section corresponding to that
+ * from the buffer. Copies the text between the buffer and the endpoint representing the next json attribute.
+ * 
+ * parameters: 
+ * struct ticket *currentTicket, the ticket being modified.
+ * int index, the parameter to be filled out.
+ * char **fields, list of all included parameter names.
+ * char **endpoints, list of the next parameter after the field of matching index value.
+ * char *buffer, current pointer location in the open json file's full text.
+ */
+void fillTicketField(struct ticket *currentTicket, int index, char **fields, char **endpoints, char*buffer){
 	char *endpoint = strstr(buffer, endpoints[index]);
 	buffer += strlen(fields[index]);
 	size_t length = endpoint - buffer;
@@ -73,6 +84,15 @@ void fillTicketField(struct ticket* currentTicket, int index, char **fields, cha
 	}
 }	
 
+/* Parses an entire json file into a list of tickets allocated to the heap, with all fields
+ * filled out.
+ *
+ * parameter:
+ * FILE *fp, the JSON file being parsed.
+ *
+ * returns:
+ * struct ticket **tickets, the list of tickets being returned.
+ */
 struct ticket **parseTickets(FILE *fp){
 	fseek(fp, 0, SEEK_SET);	
 	char *buffer = NULL;
@@ -99,7 +119,11 @@ struct ticket **parseTickets(FILE *fp){
 	free(buffer);
 	return tickets;
 }
-
+/* Frees all memory allocated to the heap for each ticket in a list of tickets.
+ *
+ * parameter: 
+ * struct ticket **tickets, a pointer to a group of pointers to tickets.
+ */
 void freeAll(struct ticket **tickets){
 	while (*tickets){
 		free((*tickets) -> id);
@@ -113,16 +137,3 @@ void freeAll(struct ticket **tickets){
 	}
 }
 
-int main(){
-	FILE *fp = fopen("tickets.json", "r");
-	int x = ticketCount(fp);
-	printf("%d \n", x);
-	struct ticket **tickets; 
-	tickets = parseTickets(fp);
-	printf("%s\n", tickets[2] -> id);
-	printf("%s\n", tickets[2] -> description);
-	freeAll(tickets);
-	free(tickets);
-	fclose(fp);
-	return 0;
-}
