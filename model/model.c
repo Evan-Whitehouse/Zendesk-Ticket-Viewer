@@ -54,6 +54,10 @@ size_t ticketCount(FILE *fp){
 void fillTicketField(struct ticket *currentTicket, int index, char **fields, char **endpoints, char*buffer){
 	char *endpoint = strstr(buffer, endpoints[index]);
 	buffer += strlen(fields[index]);
+	if (buffer[0] == 34){
+		buffer += 1;
+		endpoint -= 1;
+	}
 	size_t length = endpoint - buffer;
 	char* field = (char*) malloc(length + 1);
 	field[length] = '\0';
@@ -101,6 +105,10 @@ struct ticket **parseTickets(FILE *fp){
 	size_t ticketCounter = ticketCount(fp);
 	struct ticket** tickets;
 	tickets = (struct ticket **) malloc(len * sizeof(struct ticket**));
+	//initialize list
+	for (int i = 0; i < len; i++){
+		tickets[i] = NULL;
+	}
 	char* bufPointer = buffer;
 	char* fields[] = {",\"id\":",  ",\"created_at\":", ",\"updated_at\":", 
 		",\"subject\":", ",\"description\":", ",\"priority\":", ",\"status\":"};
