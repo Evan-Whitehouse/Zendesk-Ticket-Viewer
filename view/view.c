@@ -15,12 +15,17 @@ void printLabels(){
 
 // Display the menu for page 0 (can't scroll backwards).
 void displayMenuStart(){
-	printf("Enter 2 to advance, or 3 to search for a ticket by ID. \n");
+	printf("Enter 2 to view next 25 tickets, or 3 to search for a ticket by ID. \n");
+}
+
+// Display the menu for a page with tickets before and after it.
+void displayMenuMiddle(){
+	printf("Enter 1 to view previous 25 tickets, 2 to view the next 25, or 3 to search for a ticket by ID.\n");
 }
 
 // Display the menu for the last page (can't scroll forwards).
 void displayMenuEnd(){
-	printf("Enter 1 to scroll backward, or 3 to search for a ticket by ID. \n");
+	printf("Enter 1 to view previous 25 tickets, or 3 to search for a ticket by ID. \n");
 }
 
 // Display the menu for when a single ticket is being viewed.
@@ -57,8 +62,9 @@ void displayTicketArray(int page, int ticketCount, struct ticket **tickets){
  * struct ticket **tickets, the list of tickets to print from.
  */
 void displaySingleTicket(int id, struct ticket **tickets){
-	printLabels();
-	printf("%-5.5s|%-28.28s|%-21.21s|%-21.21s|%-9.9s|%-8.8s\n", tickets[id - 1] -> id, tickets[id - 1] -> subject,
+	printf("%-5s|%-38s|%-21s|%-21s|%-9s|%-8s\n", "ID", "Subject",
+			"Created At", "Updated At", "Priority", "Status");
+	printf("%-5.5s|%-38.38s|%-21.21s|%-21.21s|%-9.9s|%-8.8s\n", tickets[id - 1] -> id, tickets[id - 1] -> subject,
 	tickets[id - 1] -> created_at, tickets[id - 1] -> updated_at, tickets[id - 1] -> priority, tickets[id - 1] -> status);
 	printf("%s\n", tickets[id - 1] -> description);
 }

@@ -1,10 +1,13 @@
-#include "../model/ticket.h";
+#include "../model/ticket.h"
 #ifndef VIEW_H
 #define VIEW_H
 
 void printLabels();
 
 void displayMenuStart();
+
+
+void displayMenuMiddle();
 
 void displayMenuEnd();
 
