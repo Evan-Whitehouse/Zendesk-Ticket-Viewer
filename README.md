@@ -30,4 +30,8 @@ Enter ./ztv in your terminal to launch the executable. Follow onscreen direction
 
 ## Testing
 
-Unit tests are present for the model and view, although view tests are fairly limited as several of the functions just call a printf statement. ![image](https://user-images.githubusercontent.com/94804089/143813631-41c07e00-ebfc-41a4-9ff3-a4e7e65d0ca0.png)
+Unit tests are present for the model and view, although view tests are fairly limited as several of the functions just call a printf statement. 
+The controller does not have unit tests written, and I did black box testing to ensure state transitions were working as expected. If the state transitions were separate functions unit testing would be a lot more effective, and I would implement it by redirecting a text file containing a series of entries into the standard input during the test, and then redirect stdout to another textfile, comparing that file to one with my expected output. Time constraints over the holidays didn't allow me to complete that to my full satisfaction, but I'm definitely aware that it can be improved.
+
+I also ran tbe program in valgrind to check for memory, leaks and none were found as seen below.
+![image](https://user-images.githubusercontent.com/94804089/143813631-41c07e00-ebfc-41a4-9ff3-a4e7e65d0ca0.png)
