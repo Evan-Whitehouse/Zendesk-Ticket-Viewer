@@ -14,11 +14,20 @@ The project was completed in C because I believe that it demonstrates skills tha
 
 ### Model
 
+Contains all methods for creating and handling an array of pointers to tickets and allocating that to memory. parseTickets is a JSON parsing function I wrote that is specific to Zendesk tickets, and I chose to write it over using an exisiting C json parsing library as it would allow me to create a ticket structure exactly suited to the fields I wanted to display, and would cut out unnecessary complexity. I broke up the logic in filling in the fields of the ticket appropriately into a seperate function mostly for readability reasons. ticketCount is a helper function in parseTickets that is also used for some of the logic in the controller. freeAll is a necessary function due to the fact that the array of ticket pointers is allocated to the heap by parseTickets and the program will need a portable way to deallocate that data structure and avoid memory leaks.  
+
 ### View
+
+The view is rather straightforward and consists of functions the controller will call when prompted by user interaction. The fields "ID", "Subject", "Created At", "Updated At", "Priority", and "Status" were chosen to display by default imagining the client as a human surveying the list looking to quickly see actionable information to respond to. When a ticket is searched individually I decided to also print the description in order to give them more information and take advantage of the additional screen space available.
 
 ### Controller
 
+The controller is the means of interaction between the program and the user, and uses the model to interact with the underlying data and the view to display the correct output according to the situation. For this program I decided to use a finite state machine for the menu, which I think promotes easy transitions between the various screens a user may need to see. A variable called page was created to help regulate which set of tickets would be displayed, as well as regulate state transitions. The main function of controller uses a while loop and conditional logic to handle state transitions, a decision that was made due to time constraints and would be very hard to implement for an FSM with more states. If I had more time to work on the project I would implement seperate functions for the state transitions which would make the main function a lot cleaner.
+
 ## Usage
+
+Enter ./ztv in your terminal to launch the executable. Follow onscreen directions to navigate the UI. Enter q to quit while in the list view.
 
 ## Testing
 
+Unit tests are present for the model and view, although view tests are fairly limited as several of the functions just call a printf statement. ![image](https://user-images.githubusercontent.com/94804089/143813631-41c07e00-ebfc-41a4-9ff3-a4e7e65d0ca0.png)
