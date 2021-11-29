@@ -1,9 +1,21 @@
+/* Controller for the Zendesk Ticket Viewer. Interacts with the user
+ * and displays information based on their inputs. Utilizes a finite state
+ * machine to regulate menu displays.
+ */
+
 #include "../model/ticket.h"
 #include "../model/parseTickets.h"
 #include <stdio.h>
 #include <string.h>
 #include "../view/view.h"
 
+/* Prints the ticket information for a ticket whose ID corresponds to user input,
+ * catches invalid input and gives user an additional opportunity to enter new input.
+ *
+ * Parameters:
+ * int countTickets, the number of tickets in the list. Used for checking the input for validity.
+ * struct ticket **tickets, the list of tickets being searched.
+ */
 void searchTicket(int countTickets ,struct ticket **tickets){
 	printf("Please enter the ticket number you wish to search for: ");
 	char id[100];
@@ -20,7 +32,9 @@ void searchTicket(int countTickets ,struct ticket **tickets){
 	}
        			
 }
-
+/* Handles ticket viewer's interactiion with the user. Implemented as a finite state machine.
+ * user input changes the state and page number, and state transitions cause output to be printed to console.
+ */
 int main(){
 	system("./controller/get-tickets.sh");
 	FILE *fp = fopen("tickets.json", "r");

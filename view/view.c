@@ -66,6 +66,6 @@ void displaySingleTicket(int id, struct ticket **tickets){
 			"Created At", "Updated At", "Priority", "Status");
 	printf("%-5.5s|%-38.38s|%-21.21s|%-21.21s|%-9.9s|%-8.8s\n", tickets[id - 1] -> id, tickets[id - 1] -> subject,
 	tickets[id - 1] -> created_at, tickets[id - 1] -> updated_at, tickets[id - 1] -> priority, tickets[id - 1] -> status);
-	printf("%s\n", tickets[id - 1] -> description);
+	printf("Description: \n%s\n", tickets[id - 1] -> description);
 }
 
