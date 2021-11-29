@@ -4,9 +4,10 @@ This project interacts with the Zendesk API to retrieve all tickets associated w
 
 ## Installation
 1. Make sure gcc is installed on your computer. (https://www.youtube.com/watch?v=wY24ehH6mC0)
-2. Edit the shell script in Zendesk-Ticket-Viewer/controller, get-tickets.sh. Enter the username, password, and domain name for your account in the appropriately named places.
+2. Edit the shell script in Zendesk-Ticket-Viewer/controller, get-tickets.sh. Enter the username, password, and domain name for your account as the appropriately named variables.
 3. Type make in the terminal while in the home directory.
 4. Unit Tests can be compiled by running make in their directories.
+5. Launch the executable by typing ./ztv in the terminal.
 
 ## Design
 
